@@ -2,8 +2,9 @@
 
 Welcome to **Physics Animations**, a collection of educational physics animations and scientific visualizations developed using **Python** and **Manim Community**.
 
-This repository is created and maintained by **Raji Youssef (The Fifth Dimension)** as part of **The Physics Symphony**, a YouTube channel dedicated to exploring physics through clear explanations, mathematical reasoning, and visual demonstrations.
 
+
+مرحبًا بكم في **Physics Animations**، مستودع يضم مجموعة من الرسوم المتحركة التعليمية في الفيزياء والتصورات العلمية، طُوّرت باستخدام **Python** ومكتبة **Manim Community**.
 ## About This Repository
 
 Physics is more than a collection of equations; it is a way of understanding the universe.
