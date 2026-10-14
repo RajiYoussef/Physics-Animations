@@ -13,6 +13,12 @@ This repository brings mathematical relationships and physical concepts to life 
 
 Designed for students, physics enthusiasts, and curious minds, these projects aim to deepen conceptual understanding while revealing the beauty, elegance, and underlying logic of physics.
 
+الفيزياء أكثر من مجرد مجموعة من المعادلات؛ إنها وسيلة لفهم الكون\.
+
+الهدف هنا  هو  إحياء العلاقات الرياضية والمفاهيم الفيزيائية من خلال رسوم متحركة تعليمية، تحوّل الأفكار المجردة إلى شروحات بصرية واضحة وسهلة الفهم\.
+
+صممت هذه المشاريع للطلاب وعشاق الفيزياء وكل من يدفعه الفضول إلى استكشاف العالم من حوله، بهدف تعميق الفهم للمفاهيم الفيزيائية، وإبراز ما تنطوي عليه الفيزياء من جمال وأناقة ومنطق عميق\.
+
 
 ## Tools and Technologies
 
