@@ -4,20 +4,11 @@ Welcome to **Physics Animations**, a collection of educational physics animation
 
 
 
-مرحبًا بكم في **Physics Animations**، مستودع يضم مجموعة من الرسوم المتحركة التعليمية في الفيزياء والتصورات العلمية، طُوّرت باستخدام **Python** ومكتبة **Manim Community**.
-## About This Repository
-
 Physics is more than a collection of equations; it is a way of understanding the universe.
 
 This repository brings mathematical relationships and physical concepts to life through educational animations, transforming abstract ideas into clear and intuitive visual explanations.
 
-Designed for students, physics enthusiasts, and curious minds, these projects aim to deepen conceptual understanding while revealing the beauty, elegance, and underlying logic of physics.
-
-الفيزياء أكثر من مجرد مجموعة من المعادلات؛ إنها وسيلة لفهم الكون\.
-
-الهدف هنا  هو  إحياء العلاقات الرياضية والمفاهيم الفيزيائية من خلال رسوم متحركة تعليمية، تحوّل الأفكار المجردة إلى شروحات بصرية واضحة وسهلة الفهم\.
-
-صممت هذه المشاريع للطلاب وعشاق الفيزياء وكل من يدفعه الفضول إلى استكشاف العالم من حوله، بهدف تعميق الفهم للمفاهيم الفيزيائية، وإبراز ما تنطوي عليه الفيزياء من جمال وأناقة ومنطق عميق\.
+Designed for students, physics enthusiasts, and curious minds, these projects aim to deepen conceptual understanding while revealing the beauty, elegance, and underlying logic of physics
 
 
 ## Tools and Technologies
