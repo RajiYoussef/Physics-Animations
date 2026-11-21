@@ -1,0 +1,65 @@
+"""PyCharm: open this file and press Run."""
+from explainer_tools import *
+
+class ModelFormulation(Explainer):
+    chapter=1
+    def construct(self):
+        with self.beat(0):
+            self.heading('لنختر دالة ونتحقق مما إذا كانت تحقق المعادلة.')
+            a,labels=domain();b,bl=graph([0,PI,PI/2],[0,1.1,.5],5,3,[3.25,0,0],'x','V(x,y)',[(0,'0'),(PI/2,r'\pi/2'),(PI,r'\pi')],[(0,'0'),(1,'1')])
+            tiles=cell_map(a,trial);self.add(tiles,a,labels,b,bl,colour_key())
+            self.reveal(ar('هذا مجرد تخمين للجهد الكهربائي، وليس الحل.',24,width=5).move_to([-3.7,2.6,0]))
+            y=ValueTracker(0);xs=np.linspace(0,PI,121)
+            curve=sampled(b,xs,trial(xs,0),GREEN)
+            curve.add_updater(lambda m:m.set_values(trial(xs,y.get_value())))
+            cut=always_redraw(lambda:Line(a.c2p(0,y.get_value()),a.c2p(PI,y.get_value()),color=GREEN,stroke_width=4))
+            self.add(curve,cut,meter('y',y,[3.25,2.75,0],GREEN))
+            self.cue('يُظهر اللون الفرق في الجهد')
+            self.play(Create(curve),run_time=2)
+            curve.add_updater(lambda m:m.set_values(trial(xs,y.get_value())))
+            for yy in [PI/4,PI/2,3*PI/4,PI]:
+                self.play(y.animate.set_value(yy),run_time=2.2,rate_func=linear)
+                self.wait(.5)
+            self.play(y.animate.set_value(PI/2),run_time=2)
+            dot=Dot(b.c2p(PI/2,.5),color=AMBER);self.reveal(dot)
+            self.reveal(formula(r'V(\pi/2,\pi/2)=0.5',27,AMBER).move_to([3.3,-2.5,0]))
+            self.wait(2)
+        self.reset()
+        with self.beat(1):
+            self.heading('مطابقة الحدود لا تكفي')
+            f=formula(r'V_{trial}(x,y)=\sin x\,(1-y/\pi)',34).move_to([0,2.4,0]);self.reveal(f)
+            ax,lx=graph([0,PI,PI/2],[0,.65,.25],4.6,2.3,[-3.5,-.1,0],'x',r'V(x,\pi/2)',[(0,'0'),(PI,r'\pi')],[(.5,'0.5')])
+            ay,ly=graph([0,PI,PI/2],[0,1.1,.5],4.6,2.3,[3.5,-.1,0],'y',r'V(\pi/2,y)',[(0,'0'),(PI,r'\pi')],[(0,'0'),(1,'1')])
+            self.add(ax,lx,ay,ly)
+            xs=np.linspace(0,PI,100);cx=sampled(ax,xs,trial(xs,PI/2));cy=sampled(ay,xs,trial(PI/2,xs),GREEN)
+            self.play(Create(cx),Create(cy),run_time=2)
+            self.cue('المنحنى ينحني مع x، لكنه خط مستقيم مع y')
+            t=ValueTracker(.3)
+            tangent=always_redraw(lambda:TangentLine(ax,lambda x:trial(x,PI/2),t.get_value(),derivative=lambda x:.5*np.cos(x),span=.7,color=AMBER))
+            self.add(tangent);self.play(t.animate.set_value(2.8),run_time=4)
+            self.reveal(formula(r'V_{xx}=-\sin x(1-y/\pi)',26,AMBER).move_to([-3.5,-2.2,0]))
+            self.play(Create(TangentLine(ay,lambda y:trial(PI/2,y),PI/2,derivative=lambda y:-1/PI,span=1.8,color=AMBER)),run_time=1.5)
+            self.reveal(formula('V_{yy}=0',28,AMBER).move_to([3.5,-2.2,0]))
+            total=formula(r'R(\pi/2,\pi/2)=-0.5+0=-0.5\ne0',29,AMBER).move_to([0,-2.85,0]);self.reveal(total)
+            self.cue('هذا التخمين لا يحقق معادلة لابلاس,  علينا إيجاد دالة أخرى')
+            emphasize(self,total,run_time=1.5)
+
+            self.wait(2)
+        self.reset()
+        with self.beat(2):
+            self.heading('نحتاج إلى دالة نستطيع تغيير شكلها,لتكن دالة زائدية')
+            a,l=graph([-3,3,1],[-1.2,1.2,1],6,3.2,[-3,-.1,0],'x','h(x)',[(-3,'-3'),(0,'0'),(3,'3')],[(-1,'-1'),(0,'0'),(1,'1')]);self.add(a,l)
+            w=ValueTracker(1);bias=ValueTracker(0);xs=np.linspace(-3,3,150)
+            line=sampled(a,xs,np.tanh(xs));line.add_updater(lambda m:m.set_values(np.tanh(w.get_value()*xs+bias.get_value())));self.add(line)
+            self.reveal(formula(r'h(x)=\tanh(wx+b)',32,PURPLE).move_to([3.5,1.7,0]))
+            self.add(meter('w',w,[3.5,.6,0]),meter('b',bias,[3.5,-.2,0],GREEN))
+            self.cue('الوزن" w" يغير ميل المنحنى')
+            for v in [2.5,.4,1]:self.play(w.animate.set_value(v),run_time=2)
+            self.cue('والانحياز"b" يزيح موضع الانتقال يمينا أو يسارا')
+            for v in [1.5,-1.5,0]:self.play(bias.animate.set_value(v),run_time=2)
+            self.reveal(ar('نأخذ مجموع دوال كهذه لنمثل الجهد',25,width=5.5).move_to([3.5,-1.3,0]))
+            self.reveal(formula(r'V_\theta=\sum_i u_i h_i+b_{out}',27,width=5.7).move_to([3.5,-2.1,0]))
+            self.cue(' يحدد"u" مساهمة كل خلية  وثيتا تجمع الأوزان والانحيازات')
+            self.wait(2)
+
+if __name__=='__main__':run_independent(ModelFormulation)
